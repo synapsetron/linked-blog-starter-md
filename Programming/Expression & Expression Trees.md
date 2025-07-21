@@ -36,3 +36,32 @@ Expression<Func<ChatRoomWorkshop, bool>> // може бути перетворе
 
 
 ![[Pasted image 20250719162357.png]]
+
+`Expression` **працює всередині `IQueryable`** — і саме в цьому головна відмінність `IQueryable` від IEnumerable
+
+### `IQueryable<T>` — це інтерфейс, який дозволяє:
+
+- приймати **вирази (`Expression<Func<T, bool>>`)** як аргументи (наприклад, у `.Where()`),
+    
+- **не виконувати запит одразу**, а **будувати дерево виразів** (`Expression Tree`),
+    
+- а потім передати це дерево виразів у **провайдер запитів**, наприклад:
+    
+    - Entity Framework,
+        
+    - LINQ to SQL,
+        
+    - MongoDB LINQ provider тощо.
+
+
+Ось що відбувається:
+
+1. `u => u.Age > 18` **не виконується** — це `Expression<Func<User, bool>>`.
+    
+2. `IQueryable` збирає **дерево виразів**.
+    
+3. Це дерево передається у `IQueryProvider` (наприклад, EF Core).
+    
+4. EF аналізує вираз і перетворює його в SQL:
+   
+		SELECT * FROM Users WHERE Age > 18 ORDER BY Name;
