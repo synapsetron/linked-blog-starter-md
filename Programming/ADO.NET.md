@@ -79,16 +79,14 @@
         
     - `try-catch-finally`
     
-7. **DataSet и DataTable**
+7. **[[DataSet, DataTable, DataAdapter]]*
     
     - Disconnected модель
         
     - Ручное заполнение таблиц
         
 8. **DataAdapter**
-    
-    - Чтение и обновление данных через `Fill` и `Update`
-        
+
 9. **CommandBuilder**
     
     - Автоматическая генерация SQL-команд (`INSERT`, `UPDATE`, `DELETE`)
